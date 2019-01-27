@@ -55,4 +55,8 @@ function setOffer() {
             console.log("txHash= " + result);
         }
     );
+    //$("#grdOpName").val="";
+    //$("#grdOpPrice").val="";
+    document.getElementById("grdOpPrice").value = "";
+    document.getElementById("grdOpPrfRate").value = "";
 }

@@ -25,4 +25,5 @@ function setOffer() {
             console.log("txHash= " + result);
         }
     );
+    document.getElementById("prPrice").value = "";
 }
