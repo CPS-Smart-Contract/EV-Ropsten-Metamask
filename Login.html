@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="./css/mainGridOperator.css">
+	<script src="./node_modules/web3/dist/web3.min.js"></script>
+</head>
+
+<body>
+	<div data-role="page" id="loginpage">
+		<div id="header" data-theme="b" data-role="header">
+			<h3>Login</h3>
+		</div>
+		<div id="wrapper">
+			<form id="form_id" name="mylogin" method="GET">
+				<div data-role="content">
+					<div class="username" data-role="fieldcontain">
+						<label for="username"> Username </label>
+						<input name="currUsername" id="field-username" placeholder="enter username" type="text">
+					</div>
+					<div class="psw" data-role="fieldcontain">
+						<label for="psw"> Password </label>
+						<input id="field-psw" placeholder="enter password" type="password">
+					</div>
+					<div data-role="fieldcontain">
+						<input id="login" type="button" value="Login" onclick="validationcheck();">
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="./src/login.js"></script>
+</body>
+
+</html>
