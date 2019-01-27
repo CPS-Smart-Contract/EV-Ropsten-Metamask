@@ -1,11 +1,9 @@
-window.addEventListener('load', () => {
-    var queries = decodeURIComponent(window.location.search);
-    queries = queries.substring(1);
-    var username = queries.split("=");
-    console.log(username[1]);
-    document.getElementById("grdOpName").value = username[1];
-    document.getElementById("grdOpName").disabled = true;
-});
+var queries = decodeURIComponent(window.location.search);
+queries = queries.substring(1);
+var username = queries.split("=");
+console.log(username[1]);
+document.getElementById("trName").value = username[1];
+document.getElementById("trName").disabled = true;
 
 const contractAddress = "0x76bae75af2f5e7e550f9dd41faa00cd4d64a8b78";
 const abi = [{ "constant": true, "inputs": [{ "name": "_ownerType", "type": "uint256" }], "name": "getMinEnergyPriceAccordingToOwnerType", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "", "type": "uint256" }], "name": "productInfoStruct", "outputs": [{ "name": "ownerName", "type": "string" }, { "name": "energyPrice", "type": "uint256" }, { "name": "ownerType", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "startIndex", "type": "uint256" }, { "name": "wantedOwnerType", "type": "uint256" }], "name": "wantedValueofProductInfoStruct", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "uint256" }, { "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_ownerType", "type": "uint256" }], "name": "getAnOwnerLength", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "ownerName", "type": "string" }, { "name": "energyPrice", "type": "uint256" }, { "name": "_ownerType", "type": "uint256" }, { "name": "profitRate", "type": "uint256" }], "name": "addOffer", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }];
@@ -19,7 +17,7 @@ if (typeof (web3) == "undefined") {
 
 /* Use getMinEnergyPriceAccordingToOwnerType funtion of smart contract to get best value of all
 offers. In this page ownerType parametre is o. Because, Grid operators need Energy Producers's offers. */
-contract.getMinEnergyPriceAccordingToOwnerType.call(0, (error, result) => {
+contract.getMinEnergyPriceAccordingToOwnerType.call(1, (error, result) => {
     if (!error) {
         $("#station").html('Best Price is ' + result[1] + '$. from ' + result[0]);//Give output to user.
         console.log(result);
@@ -34,7 +32,7 @@ function getAllOffers() {
     var length = contract1.getAnOwnerLength(0);
     var index = 0;
     for (i = 0; i < length; i++) {
-        result = contract1.wantedValueofProductInfoStruct(index, 0);//Smart contract function. Find the next Energy Producer.
+        result = contract1.wantedValueofProductInfoStruct(index, 1);//Smart contract function. Find the next Energy Producer.
         var table = document.getElementById("myTable");
         var row = table.insertRow(1);
         var cell1 = row.insertCell(0);
@@ -43,10 +41,11 @@ function getAllOffers() {
         cell2.innerHTML = result[1];//Add Table
         index = result[2];// New index is return value of smart contract function.
     }
+
 }
 function setOffer() {
     //Use addOffer function of deployed smart contract in web3 Provider. Send parametres to add new offer.
-    contract.addOffer.sendTransaction($("#grdOpName").val(), $("#grdOpPrice").val(), 1, $("#grdOpPrfRate").val(),
+    contract.addOffer.sendTransaction($("#trName").val(), $("#trPrice").val(), 2, $("#trPrfRate").val(),
         { from: web3.eth.accounts[0], gas: 3000000 },
         (error, result) => {
             if (error) {

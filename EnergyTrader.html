@@ -13,22 +13,22 @@
 <body>
 	<form method="POST">
 		<div class="container">
-			<h1>Grid Operator Interface</h1>
+			<h1>Energy Trader Interface</h1>
 		</div>
 		<div class="container">
 			<h2 id="grid"></h2>
 		</div>
 		<div class="container">
-			<label for="name" class="col-lg-2 control-label">Grid Operator Name</label>
-			<input id="grdOpName" type="text">
+			<label for="name" class="col-lg-2 control-label">Energy Trader Name</label>
+			<input id="trName" type="text">
 		</div>
 		<div class="container">
 			<label for="number" class="col-lg-2 control-label">Price</label>
-			<input id="grdOpPrice" type="text">
+			<input id="trPrice" type="text">
 		</div>
 		<div class="container">
 			<label for="name" class="col-lg-2 control-label">Profit Rate</label>
-			<input id="grdOpPrfRate" type="text">
+			<input id="trPrfRate" type="text">
 		</div>
 		<div class="container">
 			<button id="button" onclick="setOffer();">Set Price</button>
@@ -40,7 +40,7 @@
 			<table class="table table-condensed" id="myTable">
 				<thead>
 					<tr>
-						<th>Energy Producer</th>
+						<th>Energy Grid Operator</th>
 						<th>Price</th>
 					</tr>
 				</thead>
@@ -49,6 +49,6 @@
 	</form>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="./node_modules/web3/dist/web3.min.js"></script>
-	<script src="./src/gridOperator.js"></script>
+	<script src="./src/energyTrader.js"></script>
 </body>
 </html>
