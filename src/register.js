@@ -1,6 +1,6 @@
 
-const contract_address = "0x1cb709f50e65ea6c334831e8b4aff5e7dfc42a32";
-const abi = [{ "constant": true, "inputs": [{ "name": "_userName", "type": "string" }, { "name": "_userPassworde", "type": "string" }], "name": "checkUserLogin", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_userWalletAdress", "type": "string" }, { "name": "_userName", "type": "string" }, { "name": "_userPassworde", "type": "string" }, { "name": "_userType", "type": "string" }], "name": "userRegister", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "", "type": "uint256" }], "name": "userInfoStruct", "outputs": [{ "name": "userWalletAdress", "type": "string" }, { "name": "userName", "type": "string" }, { "name": "userPassword", "type": "string" }, { "name": "userType", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }];
+const contract_address = "0x9d63606c289e42b18c26d35a6a1b3113f3a607fc";
+const abi = [{ "constant": true, "inputs": [{ "name": "_userName", "type": "string" }, { "name": "_userPassworde", "type": "string" }], "name": "checkUserLogin", "outputs": [{ "name": "", "type": "string" }, { "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_userWalletAdress", "type": "string" }, { "name": "_userName", "type": "string" }, { "name": "_userPassworde", "type": "string" }, { "name": "_userType", "type": "string" }], "name": "userRegister", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "", "type": "uint256" }], "name": "userInfoStruct", "outputs": [{ "name": "userWalletAdress", "type": "string" }, { "name": "userName", "type": "string" }, { "name": "userPassword", "type": "string" }, { "name": "userType", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }];
 
 let contract;
 
@@ -55,8 +55,23 @@ function userRegister() {
                 }
                 else {
                     console.log("txhash: " + result);
-                    document.getElementById('field-userName').value="";
-                    document.getElementById('field-password').value="";
+                    contract.userRegister.call(_userWalletAddress, _userName, _userPassword, userType, (error, result) => {
+                        if (error) {
+                            return console.log(error);
+                        }
+                        else {
+                            console.log(result);
+                            if (result != "Invalid user...") {
+                                document.getElementById('field-userName').value = "";
+                                document.getElementById('field-password').value = "";
+
+                            } else {
+                                alert(result);
+                            }
+
+                        }
+
+                    });
                 }
             });
         }
