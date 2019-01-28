@@ -1,3 +1,4 @@
+// Post method.
 var queries = decodeURIComponent(window.location.search);
 queries = queries.substring(1);
 var username = queries.split("=");
