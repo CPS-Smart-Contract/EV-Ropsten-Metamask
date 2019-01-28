@@ -35,7 +35,7 @@ function getAllOffers() {
     // Injected web3 provider contract.
     let contract1 = web3.eth.contract(abi).at(contractAddress);
     // Returns enght of related offer.
-    var length = contract1.getAnOwnerLength(0);
+    var length = contract1.getAnOwnerLength(1);
     var index = 0;
     for (i = 0; i < length; i++) {
         //Smart contract function. Find the next Energy Producer.
